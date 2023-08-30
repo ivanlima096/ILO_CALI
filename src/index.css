@@ -30,19 +30,6 @@ body {
   z-index: -1;
 }
 
-.card-img:before {
-  content: "";
-  background-image: url('../src/assets/homeBackground.png');
-  background-position: left center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
-  position: absolute;
-  opacity: .25;
-  inset: 0;
-  z-index: -1;
-}
-
 @media screen and (max-width: 800px) {
   .home::before {
     background-position: left;

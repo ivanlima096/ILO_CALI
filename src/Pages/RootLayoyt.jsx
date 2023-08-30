@@ -12,7 +12,7 @@ export default function RootLayout() {
         <Link to="/"><img className="w-[4rem] min-[400px]:w-[5rem] sm:w-[8rem]" src={logoNavbar} alt="logo" /></Link>
         <div className="flex gap-1 min-[400px]:gap-2 sm:gap-8">
           <Link to="/training" className="hover:scale-105">treinar</Link>
-          <Link to="/training" className="hover:scale-105">exercícios</Link>
+          <Link to="/exercises" className="hover:scale-105">exercícios</Link>
           <Link to="/training" className="hover:scale-105">semana</Link>
           <Link to="/training" className="hover:scale-105">nutrição</Link>
         </div>
