@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #FFB703;
+}
+
+body {
+  background-color: #121212;
+}
+
+
+.home::before {
+  content: "";
+  background-image: url('../src/assets/homeBackground.png');
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  position: absolute;
+  opacity: .25;
+  inset: 0;
+  z-index: -1;
+}
+
+.card-img:before {
+  content: "";
+  background-image: url('../src/assets/homeBackground.png');
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  position: absolute;
+  opacity: .25;
+  inset: 0;
+  z-index: -1;
+}
+
+@media screen and (max-width: 800px) {
+  .home::before {
+    background-position: left;
+  }
+}
