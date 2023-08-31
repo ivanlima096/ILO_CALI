@@ -71,16 +71,21 @@ export default function Exercises() {
   }
 
   const handleSaveWorkout = () => {
-    const workoutData = {
+    const newWorkout = {
       name: workoutName,
       exercises: workoutExercises,
     };
 
-    setWorkoutName("");
-    setWorkoutExercises([]);
+    setWorkoutName("")
+    setWorkoutExercises([])
 
-    setWorkout(workoutData);
-  };
+    setWorkout(newWorkout)
+    const savedWorkouts = JSON.parse(localStorage.getItem("savedWorkouts")) || [];
+
+    savedWorkouts.push(newWorkout);
+
+    localStorage.setItem("savedWorkouts", JSON.stringify(savedWorkouts));
+  }
 
 
   return (
