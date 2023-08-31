@@ -101,7 +101,7 @@ export default function Exercises() {
         {filteredExercises.length > 0 ? (
           filteredExercises.map((exercise) => (
             <div key={exercise.name} className="py-4 h-full mx-auto my-2 w-[100%] max-w-[40rem]  rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
-              <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 min-[425px]:w-[5.5rem]" />
+              <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
                 <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
@@ -127,7 +127,7 @@ export default function Exercises() {
         ) : (
           exercises.map((exercise) => (
             <div key={exercise.name} className="py-4 h-full mx-auto my-2 w-[100%] max-w-[40rem] rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
-              <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 min-[425px]:w-[5.5rem]" />
+              <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
                 <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
@@ -199,6 +199,9 @@ export default function Exercises() {
 
           </div>
           <button
+            style={{
+              opacity: !workoutName || workoutExercises.length < 1 ? 0.5 : 1,
+            }}
             disabled={!workoutName || workoutExercises.length < 1}
             onClick={handleSaveWorkout}
             className="m-3 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
