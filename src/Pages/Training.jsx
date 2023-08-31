@@ -1,8 +1,15 @@
 import pushup from "../assets/pushup.jpg"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { ImCalendar } from "react-icons/im"
+import { useWorkout } from "../context/WorkoutContext"
 
 export default function Training() {
+  const { workout } = useWorkout()
+  console.log(workout);
+
+  if (!workout) {
+    return <div>Parece que não há nenhum treino disponível ainda. Acesse exercícios para montar um treino personalizado!</div>
+  }
   return (
     <div className="p-3 flex flex-col items-center w-full">
       <div className="flex flex-wrap gap-4 m-3">
@@ -21,7 +28,8 @@ export default function Training() {
           <img src={pushup} alt="workout-cover" className="rounded-2xl " />
           <span className="absolute bg-black rounded-b-2xl w-full h-[50%] bottom-0 opacity-60">
           </span>
-          <p className="absolute top-[6rem] min-[375px]:top-[7rem] min-[425px]:top-[8rem] sm:top-[7.5rem] lg:top-[9rem] left-3 text-2xl">TREINO DE PEITO/tríceps</p>
+          <p className="absolute top-[6rem] min-[375px]:top-[7rem] min-[425px]:top-[8rem] sm:top-[7.5rem] lg:top-[9rem] left-3 text-2xl">{workout.name}</p>
+
           <p className="absolute top-[7.6rem] min-[375px]:top-[9rem] min-[425px]:top-[10rem] sm:top-[9.5rem]  lg:top-[11rem] left-3 text-xl">20Min</p>
           <div className="absolute bottom-1 left-3 text-xl flex gap-3">
             <p >20Min</p>

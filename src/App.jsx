@@ -1,14 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
+import { WorkoutProvider } from "./context/WorkoutContext";
 
 function App() {
 
   return (
-    <>
-      <RouterProvider router={router}>
-
-      </RouterProvider>
-    </>
+    <WorkoutProvider>
+      <RouterProvider router={router} />
+    </WorkoutProvider>
   )
 }
 

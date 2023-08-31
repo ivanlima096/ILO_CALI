@@ -5,11 +5,13 @@ import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai"
 import { MdDragIndicator } from "react-icons/md"
 import { TbTrash } from "react-icons/tb"
 import { useState } from "react"
+import { useWorkout } from "../context/WorkoutContext";
 
 export default function Exercises() {
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
   const [workoutExercises, setWorkoutExercises] = useState([])
   const [workoutName, setWorkoutName] = useState("");
+  const { setWorkout } = useWorkout()
 
   const exercises = [
     {
@@ -69,15 +71,15 @@ export default function Exercises() {
   }
 
   const handleSaveWorkout = () => {
-    const workout = {
+    const workoutData = {
       name: workoutName,
       exercises: workoutExercises,
     };
 
-    console.log(workout);
-
     setWorkoutName("");
     setWorkoutExercises([]);
+
+    setWorkout(workoutData);
   };
 
 
