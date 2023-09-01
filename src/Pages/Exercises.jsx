@@ -19,6 +19,7 @@ export default function Exercises() {
       img: pushup,
       rounds: 4,
       reps: 12,
+      duration: false,
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
@@ -26,6 +27,7 @@ export default function Exercises() {
       img: inclinePushup,
       rounds: 4,
       reps: 12,
+      duration: false,
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
@@ -33,7 +35,16 @@ export default function Exercises() {
       img: pullup,
       rounds: 4,
       reps: 8,
+      duration: false,
       muscleGroup: ["Costas", "Biceps"]
+    },
+    {
+      name: "Bar Hold",
+      img: pullup,
+      rounds: 4,
+      reps: 8,
+      duration: 30,
+      muscleGroup: ["Costas", "Grip"]
     },
 
   ]
@@ -99,7 +110,6 @@ export default function Exercises() {
                 className={`select-none text-xl sm:text-2xl hover:bg-transparent hover:text-[#FFB703] hover:border-[#FFB703] bg-${selectedMuscleGroups.includes(group) ? '[#121212]' : '[#FFB703]'} text-${selectedMuscleGroups.includes(group) ? '[#FFB703]' : '[#121212]'}
                  duration-300 ease text-[#121212] rounded-3xl w-[5.5rem] border-2 border-${selectedMuscleGroups.includes(group) ? '[#FFB703]' : 'transparent'} sm:w-[6rem] px-2 py-[0.15rem] flex items-center justify-center cursor-pointer`}
                 onClick={() => handleMuscleGroupClick(group)}
-
               >
                 {group}
               </div>
@@ -111,7 +121,12 @@ export default function Exercises() {
               <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
-                <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
+                {exercise.duration !== false ? (
+                  <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.duration} Seg</p>
+                ) : (
+                  <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
+                )}
+
                 <div className="flex gap-2">
                   {exercise.muscleGroup.map((group, index) => (
                     <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[5rem] px-1 flex  items-center justify-center">
@@ -137,7 +152,11 @@ export default function Exercises() {
               <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
-                <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
+                {exercise.duration !== false ? (
+                  <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.duration} Seg</p>
+                ) : (
+                  <p className="text-md md:text-xl">{exercise.rounds} Séries X {exercise.reps} Reps</p>
+                )}
                 <div className="flex gap-2">
                   {exercise.muscleGroup.map((group, index) => (
                     <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[5rem] px-1 flex  items-center justify-center">
@@ -159,7 +178,7 @@ export default function Exercises() {
             </div>
           )))}
 
-        < button className="m-3 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded" >
+        < button className="m-6 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded" >
           Cadastrar um Exercicio
         </button>
       </div>
@@ -174,13 +193,13 @@ export default function Exercises() {
             <input
               type="text"
               placeholder="Dê um nome ao seu treino.."
-              className="bg-transparent opacity-100 text-[#FFB703] placeholder:text-[#FFB703] placeholder:opacity-50 border-b-2 border-[#FFB703]"
+              className="bg-transparent opacity-100 text-[#FFB703] placeholder:text-[#FFB703] placeholder:opacity-50 border-b-2 border-[#FFB703] text-[1.2rem] lg:text-[1.8rem]"
               value={workoutName}
               onChange={(e) => setWorkoutName(e.target.value)}
             />
           </div>
 
-          <div className="flex flex-col gap-2 w-[95%] sm:w-[70%]">
+          <div className="mt-4 flex flex-col justify-start h-[90%] gap-2 w-[95%] sm:w-[70%]">
 
             {workoutExercises.map((workoutExercise) => (
 
@@ -191,7 +210,50 @@ export default function Exercises() {
                   <div className="flex flex-col justify-evenly">
 
                     <p className="text-lg md:text-2xl ">{workoutExercise.name}</p>
-                    <p className="text-md md:text-xl">{workoutExercise.rounds} Séries X {workoutExercise.reps} Reps</p>
+                    <p className="text-md md:text-xl">
+                      <input
+                        className="bg-transparent border-b-4 border-[#FFB703] w-10"
+                        type="number"
+                        value={workoutExercise.rounds}
+                        onChange={(e) => {
+                          const newRounds = parseInt(e.target.value, 10)
+                          if (!isNaN(newRounds)) {
+                            workoutExercise.rounds = newRounds
+                            setWorkoutExercises([...workoutExercises]);
+                          }
+                        }}
+                      />
+                      Séries x
+                      {workoutExercise.duration !== false ? (
+                        <input
+                          className="ml-1 bg-transparent border-b-4 border-[#FFB703] w-10"
+                          type="number"
+                          value={workoutExercise.duration}
+                          onChange={(e) => {
+                            const newDuration = parseInt(e.target.value, 10)
+                            if (!isNaN(newDuration)) {
+                              workoutExercise.duration = newDuration
+                              setWorkoutExercises([...workoutExercises]);
+                            }
+                          }}
+                        />
+
+                      ) : (
+                        <input
+                          className="ml-1 bg-transparent border-b-4 border-[#FFB703] w-10"
+                          type="number"
+                          value={workoutExercise.reps}
+                          onChange={(e) => {
+                            const newReps = parseInt(e.target.value, 10)
+                            if (!isNaN(newReps)) {
+                              workoutExercise.reps = newReps
+                              setWorkoutExercises([...workoutExercises]);
+                            }
+                          }}
+                        />
+                      )}
+
+                      {workoutExercise.duration !== false ? "Segs" : "Reps"}</p>
 
                   </div>
                   <TbTrash size={30}
