@@ -71,15 +71,18 @@ export default function Exercises() {
   }
 
   const handleAddExerciseClick = (exercise) => {
-    if (!workoutExercises.some((ex) => ex.name === exercise.name)) {
-      const newWorkoutExercises = [...workoutExercises, exercise]
+    const newExercise = { ...exercise, id: Math.floor(Math.random() * 10000) }
+
+    if (workoutExercises.length === 0 || workoutExercises[workoutExercises.length - 1].name !== exercise.name) {
+      const newWorkoutExercises = [...workoutExercises, newExercise];
       setWorkoutExercises(newWorkoutExercises);
     }
-  }
+  };
+
   const handleRemoveExerciseClick = (exerciseToRemove) => {
-    const newWorkoutExercises = workoutExercises.filter((exercise) => exercise.name !== exerciseToRemove.name)
+    const newWorkoutExercises = workoutExercises.filter((exercise) => exercise.id !== exerciseToRemove.id);
     setWorkoutExercises(newWorkoutExercises);
-  }
+  };
 
   const handleSaveWorkout = () => {
     const newWorkout = {
@@ -203,7 +206,7 @@ export default function Exercises() {
 
             {workoutExercises.map((workoutExercise) => (
 
-              <div key={workoutExercise.name} className="mt-2 w-[100%] max-w-[40rem] rounded-3xl flex  items-center border-2 border-[#FFB703]">
+              <div key={workoutExercise.id} className="mt-2 w-[100%] max-w-[40rem] rounded-3xl flex  items-center border-2 border-[#FFB703]">
                 <img src={workoutExercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] min-[375px]:w-[6rem] sm:w-[7rem] lg:w-[10rem]  m-2 object-cover" />
                 <div className="flex justify-between items-center w-full">
 
