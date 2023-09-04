@@ -86,19 +86,19 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
             </div>
 
             <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-              <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[40%] object-cover aspect-auto rounded-xl" />
+              <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] object-cover aspect-auto rounded-xl" />
               <div className="flex flex-col items-center justify-center">
                 {!isResting ? (
                   <>
                     <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
                     <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
                     <p className="mb-10 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
-                    <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-4xl p-12">{exerciseTime}</p>
+                    <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{exerciseTime}</p>
                   </>
                 ) : (
                   <>
                     <p className="text-3xl min-[375px]:text-4xl text-center">Descanso:</p>
-                    <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-4xl p-12">{restTime}</p>
+                    <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{restTime}</p>
                   </>
                 )}
               </div>
@@ -133,7 +133,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
           <div className="overflow-y-auto overflow-x-hidden">
             {exercises.map((exercise, index) => (
               <div key={index} className="flex m-2 w-[100%] gap-5">
-                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-56 object-cover aspect-auto rounded-xl " />
+                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-56  object-cover aspect-auto rounded-xl " />
                 <div>
                   <p className="text-xl min-[375px]:text-2xl">{exercise.name}</p>
                   <p>Rounds: {exercise.rounds}</p>

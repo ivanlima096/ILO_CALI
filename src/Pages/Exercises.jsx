@@ -42,11 +42,38 @@ export default function Exercises() {
       muscleGroup: ["Costas", "Biceps"]
     },
     {
-      name: "Bar Hold",
+      name: "Marine Pull Up",
       img: pullup,
       rounds: 4,
       reps: 8,
-      duration: 5,
+      duration: false,
+      rest: 90,
+      muscleGroup: ["Costas", "Biceps"]
+    },
+    {
+      name: "Australian Pull Up",
+      img: pullup,
+      rounds: 4,
+      reps: 8,
+      duration: false,
+      rest: 90,
+      muscleGroup: ["Costas", "Biceps"]
+    },
+    {
+      name: "Australian Marine Pull Up",
+      img: pullup,
+      rounds: 4,
+      reps: 8,
+      duration: false,
+      rest: 90,
+      muscleGroup: ["Costas", "Biceps"]
+    },
+    {
+      name: "Bar Hold",
+      img: pullup,
+      rounds: 2,
+      reps: 1,
+      duration: 30,
       rest: 90,
       muscleGroup: ["Costas", "Grip"]
     },
