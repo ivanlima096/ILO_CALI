@@ -1,7 +1,7 @@
 import pushup from "../assets/pushup.jpg"
 import inclinePushup from "../assets/inclinePushup.png"
 import pullup from "../assets/pullup.png"
-import { AiFillPlusSquare, AiFillMinusSquare } from "react-icons/ai"
+import { AiFillPlusSquare } from "react-icons/ai"
 import { MdDragIndicator } from "react-icons/md"
 import { TbTrash } from "react-icons/tb"
 import { useState } from "react"
