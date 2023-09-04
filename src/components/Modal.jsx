@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exercises }) {
   const [isWorkoutStarted, setIsWorkoutStarted] = useState(false);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [currentRound, setCurrentRound] = useState(1); // Contador de rounds
+  const [currentRound, setCurrentRound] = useState(1);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [exerciseTime, setExerciseTime] = useState(120); // Tempo padrão de 120 segundos
+  const [exerciseTime, setExerciseTime] = useState(exercises[0]?.duration || exercises[0]?.reps * 5);
+  const [restTime, setRestTime] = useState(0);
+  const [isResting, setIsResting] = useState(false);
 
   const startWorkout = () => {
     setIsWorkoutStarted(true);
     setCurrentExerciseIndex(0);
     setCurrentRound(1);
     setElapsedTime(0);
-    setExerciseTime(exercises[0]?.duration || 120); // Definir tempo com base no primeiro exercício
+    setExerciseTime(exercises[0]?.duration || exercises[0]?.reps * 5);
+    setRestTime(0);
   };
 
   const finishWorkout = () => {
@@ -21,6 +24,8 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
     setCurrentRound(1);
     setElapsedTime(0);
     setExerciseTime(0);
+    setRestTime(0);
+    setIsResting(false);
   };
 
   useEffect(() => {
@@ -30,21 +35,28 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
       interval = setInterval(() => {
         setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
 
-        if (exerciseTime > 0) {
+        if (isResting && restTime > 0) {
+          setRestTime((prevRestTime) => prevRestTime - 1);
+        } else if (exerciseTime > 0) {
           setExerciseTime((prevExerciseTime) => prevExerciseTime - 1);
         } else {
-          // Quando o tempo do exercício atual acabar, verificar se há mais rounds para o exercício
           if (currentRound < currentExercise.rounds) {
-            // Se houver mais rounds, resetar o tempo para o valor do próximo round
-            setExerciseTime(exercises[currentExerciseIndex]?.duration || 120);
+            setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
             setCurrentRound((prevRound) => prevRound + 1);
+            setRestTime(exercises[currentExerciseIndex]?.rest || 0);
+            setIsResting(true);
           } else if (currentExerciseIndex < exercises.length - 1) {
-            // Se não houver mais rounds para este exercício, avançar para o próximo exercício
-            setCurrentExerciseIndex(currentExerciseIndex + 1);
-            setCurrentRound(1);
-            setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || 120); // Definir o tempo com base no próximo exercício
-          } else {
-            // Se não houver mais exercícios, finalizar o treino
+            if (currentRound === currentExercise.rounds) {
+              setRestTime(exercises[currentExerciseIndex]?.rest || 0);
+              setIsResting(true);
+            } else {
+              setCurrentExerciseIndex(currentExerciseIndex + 1);
+              setCurrentRound(1);
+              setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+              setRestTime(0);
+              setIsResting(false);
+            }
+          } else if (currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds) {
             finishWorkout();
           }
         }
@@ -54,7 +66,11 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
     return () => {
       clearInterval(interval);
     };
-  }, [isWorkoutStarted, exerciseTime, currentExerciseIndex, exercises, currentRound]);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isWorkoutStarted, exerciseTime, currentExerciseIndex, exercises, currentRound, restTime, isResting]);
 
   const currentExercise = exercises[currentExerciseIndex];
 
@@ -70,56 +86,73 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
             </div>
 
             <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-              <img src={currentExercise.img} alt="exercise-img" className="w-[90%] object-cover aspect-auto rounded-xl" />
+              <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[40%] object-cover aspect-auto rounded-xl" />
               <div className="flex flex-col items-center justify-center">
-                <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
-                <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
-                <p className="mb-10 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
-                <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-4xl p-12">{exerciseTime}</p>
+                {!isResting ? (
+                  <>
+                    <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
+                    <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
+                    <p className="mb-10 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
+                    <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-4xl p-12">{exerciseTime}</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-3xl min-[375px]:text-4xl text-center">Descanso:</p>
+                    <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-4xl p-12">{restTime}</p>
+                  </>
+                )}
               </div>
               <button
                 onClick={() => {
-                  // Quando o tempo do exercício atual acabar, verificar se há mais rounds para o exercício
-                  if (currentRound < currentExercise.rounds) {
-                    // Se houver mais rounds, resetar o tempo para o valor do próximo round
-                    setExerciseTime(exercises[currentExerciseIndex]?.duration || 120);
-                    setCurrentRound((prevRound) => prevRound + 1);
-                  } else if (currentExerciseIndex < exercises.length - 1) {
-                    // Se não houver mais rounds para este exercício, avançar para o próximo exercício
-                    setCurrentExerciseIndex(currentExerciseIndex + 1);
-                    setCurrentRound(1);
-                    setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || 120); // Definir o tempo com base no próximo exercício
+                  if (isResting) {
+                    setIsResting(false);
+                    setRestTime(0);
                   } else {
-                    // Se não houver mais exercícios, finalizar o treino
-                    finishWorkout();
+                    if (currentRound < currentExercise.rounds) {
+                      setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
+                      setCurrentRound((prevRound) => prevRound + 1);
+                      setRestTime(exercises[currentExerciseIndex]?.rest || 60);
+                      setIsResting(true);
+                    } else if (currentExerciseIndex < exercises.length - 1) {
+                      setCurrentExerciseIndex(currentExerciseIndex + 1);
+                      setCurrentRound(1);
+                      setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+                      setRestTime(60);
+                      setIsResting(true);
+                    } else {
+                      finishWorkout();
+                    }
                   }
                 }}
                 className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-0">
-                {currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino")}
+                {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
               </button>
             </div>
           </div>
         ) : (
-          exercises.map((exercise, index) => (
-            <div key={index} className="flex m-2 w-[100%] gap-5">
-              <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 object-cover aspect-auto rounded-xl" />
-              <div>
-                <p className="text-xl min-[375px]:text-2xl">{exercise.name}</p>
-                <p>Rounds: {exercise.rounds}</p>
-                <p>Reps: {exercise.reps}</p>
+          <div className="overflow-y-auto overflow-x-hidden">
+            {exercises.map((exercise, index) => (
+              <div key={index} className="flex m-2 w-[100%] gap-5">
+                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-56 object-cover aspect-auto rounded-xl " />
+                <div>
+                  <p className="text-xl min-[375px]:text-2xl">{exercise.name}</p>
+                  <p>Rounds: {exercise.rounds}</p>
+                  <p>Reps: {exercise.reps}</p>
+                  {exercise.rest && <p>Descanso: {exercise.rest}</p>}
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
 
         {!isWorkoutStarted && (
           <button
             onClick={startWorkout}
-            className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-0">
+            className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover.border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-0">
             Iniciar Treino
           </button>
         )}
       </div>
-    </div>
+    </div >
   ) : null;
 }

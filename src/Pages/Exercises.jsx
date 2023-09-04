@@ -20,6 +20,7 @@ export default function Exercises() {
       rounds: 4,
       reps: 12,
       duration: false,
+      rest: 60,
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
@@ -28,6 +29,7 @@ export default function Exercises() {
       rounds: 4,
       reps: 12,
       duration: false,
+      rest: 60,
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
@@ -36,6 +38,7 @@ export default function Exercises() {
       rounds: 4,
       reps: 8,
       duration: false,
+      rest: 90,
       muscleGroup: ["Costas", "Biceps"]
     },
     {
@@ -43,7 +46,8 @@ export default function Exercises() {
       img: pullup,
       rounds: 4,
       reps: 8,
-      duration: 30,
+      duration: 5,
+      rest: 90,
       muscleGroup: ["Costas", "Grip"]
     },
 
