@@ -12,6 +12,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
   const [countdown, setCountdown] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
 
+
   const startWorkout = () => {
     setIsWorkoutStarted(true);
     setCurrentExerciseIndex(0);
@@ -46,19 +47,20 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
           setRestTime((prevRestTime) => prevRestTime - 1);
         } else if (isResting && restTime === 0 && currentRound < currentExercise.rounds) {
           setIsResting(false);
-          setCurrentRound((prevRound) => prevRound + 1);
+          setCurrentRound((prevRound) => prevRound);
         } else if (isResting && restTime === 0 && currentRound === currentExercise.rounds) {
           setIsResting(false);
+        } else if (currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds && exerciseTime === 0) {
+          finishWorkout();
+        } else if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds && exerciseTime === 0) {
+          setIsResting(true); // Defina isResting como true após o descanso
+          setRestTime(2); // 60 segundos de descanso
+          setCurrentExerciseIndex((prevIndex) => prevIndex + 1)
+          setCurrentRound((prevRound) => prevRound = 1);
+          setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
 
-          if (currentExerciseIndex === exercises.length - 1) {
-            finishWorkout();
-          } else {
-            // Adicionando um tempo de descanso após o último round de um exercício
-            setExerciseTime(0);
-            setRestTime(60); // 60 segundos de descanso
-            setIsResting(true); // Defina isResting como true após o descanso
-          }
-        } else if (exerciseTime > 0) {
+        }
+        else if (exerciseTime > 0) {
           setExerciseTime((prevExerciseTime) => prevExerciseTime - 1);
         } else {
           if (currentRound < currentExercise.rounds) {
@@ -71,7 +73,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
             setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
             setRestTime(0);
             setIsResting(false);
-            setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
+            setCurrentExerciseIndex((prevIndex) => prevIndex + 1)
           } else if (currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds) {
             finishWorkout();
           }
@@ -140,12 +142,22 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                             setCurrentRound((prevRound) => prevRound + 1);
                             setRestTime(exercises[currentExerciseIndex]?.rest || 60);
                             setIsResting(true);
-                          } else if (currentExerciseIndex < exercises.length - 1) {
-                            setCurrentRound(1);
-                            setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
-                            setRestTime(0);
-                            setIsResting(false);
-                            setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
+                          } else if (!currentExerciseIndex < exercises.length - 1) {
+                            // Verifique se é o último round do último exercício
+                            if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds) {
+                              // Adicione o tempo de descanso antes de iniciar o próximo exercício
+                              setIsResting(true); // Defina isResting como true após o descanso
+                              setRestTime(2); // 60 segundos de descanso
+                              setCurrentRound(1);
+                              setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
+                              setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
+                            } else {
+                              setCurrentRound(1);
+                              setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+                              setRestTime(0);
+                              setIsResting(false);
+                              setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
+                            }
                           } else {
                             finishWorkout();
                           }

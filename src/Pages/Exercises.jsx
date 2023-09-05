@@ -24,57 +24,95 @@ export default function Exercises() {
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
-      name: "Incline Push Up",
-      img: inclinePushup,
-      rounds: 4,
-      reps: 12,
+      name: "Push Up Desalinhada",
+      img: pushup,
+      rounds: 3,
+      reps: 6,
       duration: false,
       rest: 60,
       muscleGroup: ["Peito", "Triceps", "Ombro"]
     },
     {
+      name: "Push Up Crucifixo",
+      img: pushup,
+      rounds: 3,
+      reps: 6,
+      duration: false,
+      rest: 30,
+      muscleGroup: ["Peito", "Triceps", "Ombro"]
+    },
+    {
+      name: "Push Up Diamond",
+      img: pushup,
+      rounds: 3,
+      reps: 6,
+      duration: false,
+      rest: 60,
+      muscleGroup: ["Peito", "Triceps", "Ombro"]
+    },
+    {
+      name: "Incline Push Up",
+      img: inclinePushup,
+      rounds: 3,
+      reps: 12,
+      duration: false,
+      rest: 30,
+      muscleGroup: ["Peito", "Triceps", "Ombro"]
+    },
+    {
+      name: "Incline Diamond Push Up",
+      img: inclinePushup,
+      rounds: 3,
+      reps: 12,
+      duration: false,
+      rest: 30,
+      muscleGroup: ["Peito", "Triceps", "Ombro"]
+    },
+    {
       name: "Pull Up",
       img: pullup,
-      rounds: 4,
+      rounds: 3,
       reps: 8,
       duration: false,
       rest: 90,
       muscleGroup: ["Costas", "Biceps"]
     },
+
+
     {
-      name: "Marine Pull Up",
+      name: "Remada",
       img: pullup,
-      rounds: 4,
-      reps: 8,
-      duration: false,
-      rest: 90,
-      muscleGroup: ["Costas", "Biceps"]
-    },
-    {
-      name: "Australian Pull Up",
-      img: pullup,
-      rounds: 4,
-      reps: 8,
-      duration: false,
-      rest: 90,
-      muscleGroup: ["Costas", "Biceps"]
-    },
-    {
-      name: "Australian Marine Pull Up",
-      img: pullup,
-      rounds: 4,
-      reps: 8,
-      duration: false,
-      rest: 5,
-      muscleGroup: ["Costas", "Biceps"]
-    },
-    {
-      name: "Bar Hold",
-      img: pullup,
-      rounds: 2,
+      rounds: 3,
       reps: 1,
-      duration: 5,
-      rest: 90,
+      duration: 3,
+      rest: 3,
+      muscleGroup: ["Costas", "Grip"]
+    },
+    {
+      name: "Barco",
+      img: pullup,
+      rounds: 3,
+      reps: 1,
+      duration: 3,
+      rest: 3,
+      muscleGroup: ["Costas", "Grip"]
+    },
+    {
+      name: "Canivete",
+      img: pullup,
+      rounds: 3,
+      reps: 1,
+      duration: false,
+      rest: 30,
+      muscleGroup: ["Costas", "Grip"]
+    },
+    {
+      name: "Montain Climber",
+      img: pullup,
+      rounds: 3,
+      reps: 1,
+      duration: 30,
+      rest: 30,
       muscleGroup: ["Costas", "Grip"]
     },
 
