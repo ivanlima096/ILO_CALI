@@ -65,7 +65,7 @@ export default function Exercises() {
       rounds: 4,
       reps: 8,
       duration: false,
-      rest: 90,
+      rest: 5,
       muscleGroup: ["Costas", "Biceps"]
     },
     {
@@ -73,7 +73,7 @@ export default function Exercises() {
       img: pullup,
       rounds: 2,
       reps: 1,
-      duration: 30,
+      duration: 5,
       rest: 90,
       muscleGroup: ["Costas", "Grip"]
     },

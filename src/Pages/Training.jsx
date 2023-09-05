@@ -87,7 +87,7 @@ export default function Training() {
               selectedMuscleGroups.some((group) => topMuscleGroups.includes(group));
 
             return isWorkoutVisible ? (
-              <div key={index} className="card-img w-[26rem] sm:w-[22rem] lg:w-[26rem] rounded-3xl relative flex  hover:scale-105 duration-300 ease shadow-2xl">
+              <div key={index} className="card-img w-[26rem] sm:w-[22rem] lg:w-[26rem] rounded-3xl relative flex duration-200 ease hover:shadow-[0px_4px_rgba(255,255,0,0.55)]">
                 <img src={pushup} alt="workout-cover" className="rounded-2xl cursor-pointer" onClick={() => handleModal(index)} />
                 <span className="absolute bg-black rounded-b-2xl w-full h-[40%] bottom-0 opacity-60"></span>
                 <p className="absolute top-[7rem] min-[375px]:top-[8.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] left-3 text-2xl">

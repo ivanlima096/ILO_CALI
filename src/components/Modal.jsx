@@ -1,3 +1,4 @@
+import { BsFillPauseCircleFill, BsPlayCircleFill } from "react-icons/bs"
 import React, { useState, useEffect } from "react";
 
 export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exercises }) {
@@ -8,6 +9,8 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
   const [exerciseTime, setExerciseTime] = useState(exercises[0]?.duration || exercises[0]?.reps * 5);
   const [restTime, setRestTime] = useState(0);
   const [isResting, setIsResting] = useState(false);
+  const [countdown, setCountdown] = useState(5);
+  const [isPaused, setIsPaused] = useState(false);
 
   const startWorkout = () => {
     setIsWorkoutStarted(true);
@@ -16,6 +19,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
     setElapsedTime(0);
     setExerciseTime(exercises[0]?.duration || exercises[0]?.reps * 5);
     setRestTime(0);
+    setCountdown(5);
   };
 
   const finishWorkout = () => {
@@ -26,17 +30,34 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
     setExerciseTime(0);
     setRestTime(0);
     setIsResting(false);
+    setCountdown(0);
   };
 
   useEffect(() => {
     let interval;
 
-    if (isWorkoutStarted) {
+    if (isWorkoutStarted && !isPaused) {
       interval = setInterval(() => {
         setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
 
-        if (isResting && restTime > 0) {
+        if (countdown > 0) {
+          setCountdown((prevCountdown) => prevCountdown - 1);
+        } else if (isResting && restTime > 0) {
           setRestTime((prevRestTime) => prevRestTime - 1);
+        } else if (isResting && restTime === 0 && currentRound < currentExercise.rounds) {
+          setIsResting(false);
+          setCurrentRound((prevRound) => prevRound + 1);
+        } else if (isResting && restTime === 0 && currentRound === currentExercise.rounds) {
+          setIsResting(false);
+
+          if (currentExerciseIndex === exercises.length - 1) {
+            finishWorkout();
+          } else {
+            // Adicionando um tempo de descanso após o último round de um exercício
+            setExerciseTime(0);
+            setRestTime(60); // 60 segundos de descanso
+            setIsResting(true); // Defina isResting como true após o descanso
+          }
         } else if (exerciseTime > 0) {
           setExerciseTime((prevExerciseTime) => prevExerciseTime - 1);
         } else {
@@ -46,16 +67,11 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
             setRestTime(exercises[currentExerciseIndex]?.rest || 0);
             setIsResting(true);
           } else if (currentExerciseIndex < exercises.length - 1) {
-            if (currentRound === currentExercise.rounds) {
-              setRestTime(exercises[currentExerciseIndex]?.rest || 0);
-              setIsResting(true);
-            } else {
-              setCurrentExerciseIndex(currentExerciseIndex + 1);
-              setCurrentRound(1);
-              setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
-              setRestTime(0);
-              setIsResting(false);
-            }
+            setCurrentRound(1);
+            setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+            setRestTime(0);
+            setIsResting(false);
+            setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
           } else if (currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds) {
             finishWorkout();
           }
@@ -66,21 +82,17 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
     return () => {
       clearInterval(interval);
     };
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isWorkoutStarted, exerciseTime, currentExerciseIndex, exercises, currentRound, restTime, isResting]);
+  }, [isWorkoutStarted, isPaused, exerciseTime, currentExerciseIndex, exercises, currentRound, restTime, isResting, countdown]);
 
   const currentExercise = exercises[currentExerciseIndex];
 
   return isModalOpen ? (
     <div className="z-10 fixed top-0 left-0 w-[100vw] h-screen flex items-center justify-center bg-[#000000d9]" onClick={() => setIsModalOpen(false)}>
-      <div className="modalBg p-2 bg-black w-[80%] sm:w-[60%] h-[80%] rounded-3xl flex flex-col items-center  border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
+      <div className="modalBg p-2 bg-black w-[80%] sm:w-[60%] sm:h-[90%] rounded-3xl flex flex-col items-center border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
         <h1 className="text-4xl mb-2">{workoutName}</h1>
 
         {isWorkoutStarted ? (
-          <div className="w-[100%] flex flex-col items-center">
+          <>
             <div className="text-2xl mb-4">
               Exercício {currentExerciseIndex + 1} de {exercises.length}
             </div>
@@ -97,38 +109,47 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                   </>
                 ) : (
                   <>
-                    <p className="text-3xl min-[375px]:text-4xl text-center">Descanso:</p>
+                    <p className="text-3xl min-[375px]:text-4xl text-center mb-5">Descanso:</p>
                     <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{restTime}</p>
                   </>
                 )}
               </div>
-              <button
-                onClick={() => {
-                  if (isResting) {
-                    setIsResting(false);
-                    setRestTime(0);
-                  } else {
-                    if (currentRound < currentExercise.rounds) {
-                      setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
-                      setCurrentRound((prevRound) => prevRound + 1);
-                      setRestTime(exercises[currentExerciseIndex]?.rest || 60);
-                      setIsResting(true);
-                    } else if (currentExerciseIndex < exercises.length - 1) {
-                      setCurrentExerciseIndex(currentExerciseIndex + 1);
-                      setCurrentRound(1);
-                      setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
-                      setRestTime(60);
-                      setIsResting(true);
+              <div className="flex flex-col gap-5 items-center justify-center absolute bottom-5">
+                <button
+                  onClick={() => {
+                    setIsPaused((prevIsPaused) => !prevIsPaused);
+                  }}
+                  className="text-[2.3rem] sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                  {isPaused ? <BsPlayCircleFill /> : <BsFillPauseCircleFill />}
+                </button>
+                <button
+                  onClick={() => {
+                    if (isResting) {
+                      setIsResting(false);
+                      setRestTime(0);
                     } else {
-                      finishWorkout();
+                      if (currentRound < currentExercise.rounds) {
+                        setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
+                        setCurrentRound((prevRound) => prevRound + 1);
+                        setRestTime(exercises[currentExerciseIndex]?.rest || 60);
+                        setIsResting(true);
+                      } else if (currentExerciseIndex < exercises.length - 1) {
+                        setCurrentRound(1);
+                        setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+                        setRestTime(0);
+                        setIsResting(false);
+                        setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
+                      } else {
+                        finishWorkout();
+                      }
                     }
-                  }
-                }}
-                className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-0">
-                {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
-              </button>
+                  }}
+                  className="text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                  {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
+                </button>
+              </div>
             </div>
-          </div>
+          </>
         ) : (
           <div className="overflow-y-auto overflow-x-hidden">
             {exercises.map((exercise, index) => (
@@ -148,11 +169,11 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
         {!isWorkoutStarted && (
           <button
             onClick={startWorkout}
-            className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover.border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-0">
+            className="m-3 text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover.border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded absolute bottom-5">
             Iniciar Treino
           </button>
         )}
       </div>
-    </div >
+    </div>
   ) : null;
 }
