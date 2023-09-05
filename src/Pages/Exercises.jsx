@@ -1,7 +1,7 @@
 import pushup from "../assets/pushup.jpg"
 import inclinePushup from "../assets/inclinePushup.png"
 import pullup from "../assets/pullup.png"
-import { AiFillPlusSquare } from "react-icons/ai"
+import { AiFillPlusSquare, AiFillEdit } from "react-icons/ai"
 import { MdDragIndicator } from "react-icons/md"
 import { TbTrash } from "react-icons/tb"
 import { useState } from "react"
@@ -12,8 +12,7 @@ export default function Exercises() {
   const [workoutExercises, setWorkoutExercises] = useState([])
   const [workoutName, setWorkoutName] = useState("");
   const { setWorkout } = useWorkout()
-
-  const exercises = [
+  const [exercises, setExercises] = useState([
     {
       name: "Push Up",
       img: pushup,
@@ -78,7 +77,9 @@ export default function Exercises() {
       muscleGroup: ["Costas", "Grip"]
     },
 
-  ]
+  ])
+
+
 
   const uniqueMuscleGroups = Array.from(
     new Set(exercises.flatMap((exercise) => exercise.muscleGroup))
@@ -132,6 +133,12 @@ export default function Exercises() {
     localStorage.setItem("savedWorkouts", JSON.stringify(savedWorkouts));
   }
 
+  const handleDeleteExercise = (exercise) => {
+    console.log(`Clicou em ${exercise.name}`)
+    const newExercises = exercises.filter((ex) => ex.name !== exercise.name)
+    setExercises(newExercises)
+  }
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-100% p-3 mx-auto">
@@ -151,7 +158,7 @@ export default function Exercises() {
         </div>
         {filteredExercises.length > 0 ? (
           filteredExercises.map((exercise) => (
-            <div key={exercise.name} className="py-4 h-full mx-auto my-2 w-[100%] max-w-[40rem]  rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
+            <div key={exercise.name} className="py-4 h-auto mx-auto my-2 w-[100%] max-w-[40rem]  rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
               <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
@@ -163,17 +170,36 @@ export default function Exercises() {
 
                 <div className="flex gap-2">
                   {exercise.muscleGroup.map((group, index) => (
-                    <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[5rem] px-1 flex  items-center justify-center">
+                    <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[3.5rem] flex  items-center justify-center">
                       {group}
                     </div>
                   ))}
                 </div>
 
               </div>
+              <div className="h-12 flex gap-0">
+
+                <button>
+                  <AiFillEdit
+                    size={38}
+                    className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                    onClick={() => handleAddExerciseClick(exercise)}
+                  />
+                </button>
+                <span className="bg-[#ffb703] color-white w-[0.15rem]"></span>
+                <button>
+                  <TbTrash
+                    size={38}
+                    className="mx-1 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                    onClick={() => handleAddExerciseClick(exercise)}
+                  />
+                </button>
+                <span className="bg-[#ffb703] color-white w-[0.1rem]"></span>
+              </div>
               <button>
                 <AiFillPlusSquare
                   size={48}
-                  className="border-l-2 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease m-3"
+                  className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
                   onClick={() => handleAddExerciseClick(exercise)}
                 />
               </button>
@@ -193,19 +219,37 @@ export default function Exercises() {
                 )}
                 <div className="flex gap-2">
                   {exercise.muscleGroup.map((group, index) => (
-                    <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[5rem] px-1 flex  items-center justify-center">
+                    <div key={index} className="text-sm min-[425px]:text-lg sm:text-lg bg-[#FFB703] text-[#121212] rounded-3xl w-[2.5rem] min-[425px]:w-[3.5rem] border-2 border-[#FFB703] sm:w-[4rem] px-1 flex  items-center justify-center">
                       {group}
                     </div>
                   ))}
                 </div>
 
               </div>
+              <div className="h-12 flex gap-0">
 
+                <button>
+                  <AiFillEdit
+                    size={38}
+                    className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                    onClick={() => handleAddExerciseClick(exercise)}
+                  />
+                </button>
+                <span className="bg-[#ffb703] color-white w-[0.15rem]"></span>
+                <button>
+                  <TbTrash
+                    size={38}
+                    className="mx-1 p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                    onClick={() => handleDeleteExercise(exercise)}
+                  />
+                </button>
+
+                <span className="bg-[#ffb703] color-white w-[0.1rem]"></span>
+              </div>
               <button>
-
                 <AiFillPlusSquare
                   size={48}
-                  className="border-l-2 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease m-3"
+                  className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
                   onClick={() => handleAddExerciseClick(exercise)}
                 />
               </button>
@@ -219,7 +263,7 @@ export default function Exercises() {
 
       {/* SEGUNDA COLUNA */}
       <div>
-        <div className="w-full h-full border-2 rounded-xl border-[#FFB703] flex flex-col items-center justify-between">
+        <div className="w-full h-auto max-h-full border-2 rounded-xl border-[#FFB703] flex flex-col items-center justify-between">
           <div className="flex flex-col items-center">
 
             <h1 className="mt-3 text-[3rem] lg:text-[5.2rem]">Monte Seu Treino</h1>
@@ -297,9 +341,7 @@ export default function Exercises() {
                 </div>
                 <MdDragIndicator size={48} className="border-l-2 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease m-3" />
               </div>
-
             ))}
-
           </div>
           <button
             style={{
@@ -307,7 +349,7 @@ export default function Exercises() {
             }}
             disabled={!workoutName || workoutExercises.length < 1}
             onClick={handleSaveWorkout}
-            className="m-3 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+            className="m-8 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
             salvar
           </button>
         </div>

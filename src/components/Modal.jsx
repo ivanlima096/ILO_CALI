@@ -1,4 +1,4 @@
-import { BsFillPauseCircleFill, BsPlayCircleFill } from "react-icons/bs"
+import { BsFillPauseCircleFill, BsPlayCircleFill } from "react-icons/bs";
 import React, { useState, useEffect } from "react";
 
 export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exercises }) {
@@ -88,67 +88,76 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
 
   return isModalOpen ? (
     <div className="z-10 fixed top-0 left-0 w-[100vw] h-screen flex items-center justify-center bg-[#000000d9]" onClick={() => setIsModalOpen(false)}>
-      <div className="modalBg p-2 bg-black w-[80%] sm:w-[60%] sm:h-[90%] rounded-3xl flex flex-col items-center border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
-        <h1 className="text-4xl mb-2">{workoutName}</h1>
+      <div className="modalBg p-5 bg-black w-[80%] sm:w-[60%] sm:h-[90%] rounded-3xl flex flex-col items-center border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
+        <h1 className="text-4xl mb-8">{workoutName}</h1>
 
         {isWorkoutStarted ? (
           <>
-            <div className="text-2xl mb-4">
-              Exercício {currentExerciseIndex + 1} de {exercises.length}
-            </div>
+            {countdown > 0 ? (
+              <div className="text-6xl font-bold mb-4 flex flex-col items-center">
+                <p>Prepare-se!</p>
+                {countdown}
+              </div>
+            ) : (
+              <>
+                <div className="text-2xl mb-4">
+                  Exercício {currentExerciseIndex + 1} de {exercises.length}
+                </div>
 
-            <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-              <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] object-cover aspect-auto rounded-xl" />
-              <div className="flex flex-col items-center justify-center">
-                {!isResting ? (
-                  <>
-                    <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
-                    <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
-                    <p className="mb-10 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
-                    <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{exerciseTime}</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="text-3xl min-[375px]:text-4xl text-center mb-5">Descanso:</p>
-                    <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{restTime}</p>
-                  </>
-                )}
-              </div>
-              <div className="flex flex-col gap-5 items-center justify-center absolute bottom-5">
-                <button
-                  onClick={() => {
-                    setIsPaused((prevIsPaused) => !prevIsPaused);
-                  }}
-                  className="text-[2.3rem] sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
-                  {isPaused ? <BsPlayCircleFill /> : <BsFillPauseCircleFill />}
-                </button>
-                <button
-                  onClick={() => {
-                    if (isResting) {
-                      setIsResting(false);
-                      setRestTime(0);
-                    } else {
-                      if (currentRound < currentExercise.rounds) {
-                        setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
-                        setCurrentRound((prevRound) => prevRound + 1);
-                        setRestTime(exercises[currentExerciseIndex]?.rest || 60);
-                        setIsResting(true);
-                      } else if (currentExerciseIndex < exercises.length - 1) {
-                        setCurrentRound(1);
-                        setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
-                        setRestTime(0);
-                        setIsResting(false);
-                        setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
-                      } else {
-                        finishWorkout();
-                      }
-                    }
-                  }}
-                  className="text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
-                  {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
-                </button>
-              </div>
-            </div>
+                <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
+                  <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] object-cover aspect-auto rounded-xl" />
+                  <div className="flex flex-col items-center justify-center">
+                    {!isResting ? (
+                      <>
+                        <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
+                        <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
+                        <p className="mb-10 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
+                        <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{exerciseTime}</p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-3xl min-[375px]:text-4xl text-center mb-5">Descanso:</p>
+                        <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{restTime}</p>
+                      </>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-5 items-center justify-center absolute bottom-5">
+                    <button
+                      onClick={() => {
+                        setIsPaused((prevIsPaused) => !prevIsPaused);
+                      }}
+                      className="text-[2.3rem] sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                      {isPaused ? <BsPlayCircleFill /> : <BsFillPauseCircleFill />}
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (isResting) {
+                          setIsResting(false);
+                          setRestTime(0);
+                        } else {
+                          if (currentRound < currentExercise.rounds) {
+                            setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
+                            setCurrentRound((prevRound) => prevRound + 1);
+                            setRestTime(exercises[currentExerciseIndex]?.rest || 60);
+                            setIsResting(true);
+                          } else if (currentExerciseIndex < exercises.length - 1) {
+                            setCurrentRound(1);
+                            setExerciseTime(exercises[currentExerciseIndex + 1]?.duration || exercises[0]?.reps * 5);
+                            setRestTime(0);
+                            setIsResting(false);
+                            setCurrentExerciseIndex((prevIndex) => prevIndex + 1); // Move to the next exercise
+                          } else {
+                            finishWorkout();
+                          }
+                        }
+                      }}
+                      className="text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                      {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </>
         ) : (
           <div className="overflow-y-auto overflow-x-hidden">
