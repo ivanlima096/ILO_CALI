@@ -96,7 +96,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
         {isWorkoutStarted ? (
           <>
             {countdown > 0 ? (
-              <div className="text-6xl font-bold mb-4 flex flex-col items-center">
+              <div className="text-6xl font-bold mb-4 flex flex-col items-center select-none">
                 <p>Prepare-se!</p>
                 {countdown}
               </div>
@@ -143,11 +143,9 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                             setRestTime(exercises[currentExerciseIndex]?.rest || 60);
                             setIsResting(true);
                           } else if (!currentExerciseIndex < exercises.length - 1) {
-                            // Verifique se é o último round do último exercício
                             if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds) {
-                              // Adicione o tempo de descanso antes de iniciar o próximo exercício
-                              setIsResting(true); // Defina isResting como true após o descanso
-                              setRestTime(2); // 60 segundos de descanso
+                              setIsResting(true)
+                              setRestTime(2)
                               setCurrentRound(1);
                               setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
                               setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
@@ -163,8 +161,9 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                           }
                         }
                       }}
-                      className="text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
-                      {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Finalizar Treino"))}
+                      className="text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded"
+                      disabled={currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds && !isResting}>
+                      {isResting ? "Pular Descanso" : (currentRound < currentExercise.rounds ? "Próximo Round" : (currentExerciseIndex < exercises.length - 1 ? "Próximo Exercício" : "Treino Finalizado!"))}
                     </button>
                   </div>
                 </div>
@@ -195,6 +194,6 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
           </button>
         )}
       </div>
-    </div>
+    </div >
   ) : null;
 }
