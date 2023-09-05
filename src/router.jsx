@@ -3,6 +3,8 @@ import RootLayout from "./Pages/RootLayoyt";
 import Home from "./Pages/Home";
 import Training from "./Pages/Training";
 import Exercises from "./Pages/Exercises";
+import ExerciseForm from "./Pages/CreateExercise";
+import CreateExercise from "./Pages/CreateExercise";
 
 const router = createBrowserRouter([{
   path: "/",
@@ -14,6 +16,9 @@ const router = createBrowserRouter([{
     },
     {
       path: "exercises", element: <Exercises />
+    },
+    {
+      path: "createExercise", element: <CreateExercise />
     },
   ]
 
