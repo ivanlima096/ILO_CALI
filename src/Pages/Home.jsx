@@ -14,10 +14,10 @@ export default function Home() {
           Faça login para salvar seus treinos favoritos, gerenciar seus treinos, suas receitas e histórico de treinos.
         </h2>
         <div className="flex justify-evenly w-[100%] mt-20 sm:mt-14">
-          <Link to="/training"><button className="text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.5rem] sm:w-[11rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-8 py-2 rounded">
+          <Link to="/training"><button className="text-[1rem] min-[400px]:text-[1.6rem] sm:text-[2.5rem] w-[5rem] sm:w-[11rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-4 py-2 rounded">
             treinar
           </button></Link>
-          <Link to="/training"> <button className="text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.5rem] sm:w-[11rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-2 py-2 rounded">
+          <Link to="/training"> <button className="text-[1rem] min-[400px]:text-[1.6rem] sm:text-[2.5rem]  w-[5rem] sm:w-[11rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-4 py-2 rounded">
             login
           </button></Link>
 

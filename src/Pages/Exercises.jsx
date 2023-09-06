@@ -114,7 +114,7 @@ export default function Exercises() {
                   <button>
                     <AiFillEdit
                       size={38}
-                      className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                      className="mt-1 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease  w-8 sm:w-auto"
                     />
                   </button>
                 </Link >
@@ -122,7 +122,7 @@ export default function Exercises() {
                 <button>
                   <TbTrash
                     size={38}
-                    className="mx-1 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                    className="mx-1 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease  w-8 sm:w-auto"
                     onClick={() => handleDeleteExercise(exercise)}
                   />
                 </button>
@@ -131,7 +131,7 @@ export default function Exercises() {
               <button>
                 <AiFillPlusSquare
                   size={48}
-                  className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                  className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease  w-8 sm:w-auto"
                   onClick={() => handleAddExerciseClick(exercise)}
                 />
               </button>
@@ -163,7 +163,7 @@ export default function Exercises() {
                   <button>
                     <AiFillEdit
                       size={38}
-                      className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                      className="mt-1 p-1 cursor-pointer hover:scale-110 duration-300 ease w-8 sm:w-auto"
                     />
                   </button>
                 </Link>
@@ -171,7 +171,7 @@ export default function Exercises() {
                 <button>
                   <TbTrash
                     size={38}
-                    className="mx-1 p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                    className="mx-1 p-1 cursor-pointer hover:scale-110 duration-300 ease w-8 sm:w-auto"
                     onClick={() => handleDeleteExercise(exercise)}
                   />
                 </button>
@@ -181,7 +181,7 @@ export default function Exercises() {
               <button>
                 <AiFillPlusSquare
                   size={48}
-                  className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                  className="p-1 cursor-pointer hover:scale-110 duration-300 ease w-8 sm:w-auto"
                   onClick={() => handleAddExerciseClick(exercise)}
                 />
               </button>

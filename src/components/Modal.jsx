@@ -90,7 +90,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
 
   return isModalOpen ? (
     <div className="z-10 fixed top-0 left-0 w-[100vw] h-screen flex items-center justify-center bg-[#000000d9]" onClick={() => setIsModalOpen(false)}>
-      <div className="modalBg p-5 bg-black w-[80%] sm:w-[60%] sm:h-[90%] rounded-3xl flex flex-col items-center border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
+      <div className="modalBg p-5 bg-black w-[80%] h-[95vh] sm:w-[60%] sm:h-[90%] rounded-3xl flex flex-col items-center border-2 border-[#FFB703] absolute" onClick={(e) => e.stopPropagation()}>
         <h1 className="text-4xl mb-8">{workoutName}</h1>
 
         {isWorkoutStarted ? (
@@ -107,13 +107,13 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                 </div>
 
                 <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-                  <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[35%] 2xl:w-[30%] object-cover aspect-square rounded-xl" />
+                  <img src={currentExercise.img} alt="exercise-img" className="w-[50%] sm:w-[80%] lg:w-[60%] xl:w-[35%] 2xl:w-[30%] object-cover aspect-square rounded-xl" />
                   <div className="flex flex-col items-center justify-center">
                     {!isResting ? (
                       <>
                         <p className="text-3xl min-[375px]:text-4xl text-center">{currentExercise.name}</p>
                         <p className="text-xl min-[375px]:text-2xl text-center">Rounds: {currentRound} de {currentExercise.rounds}</p>
-                        <p className="mb-10 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
+                        <p className="mb-2 sm:mb-1 text-xl min-[375px]:text-2xl text-center">Reps: {currentExercise.reps}</p>
                         <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl p-10">{exerciseTime}</p>
                       </>
                     ) : (
