@@ -5,6 +5,7 @@ import Training from "./Pages/Training";
 import Exercises from "./Pages/Exercises";
 import ExerciseForm from "./Pages/CreateExercise";
 import CreateExercise from "./Pages/CreateExercise";
+import UpdateExercise from "./Pages/UpdateExercise";
 
 const router = createBrowserRouter([{
   path: "/",
@@ -18,7 +19,10 @@ const router = createBrowserRouter([{
       path: "exercises", element: <Exercises />
     },
     {
-      path: "createExercise", element: <CreateExercise />
+      path: "create", element: <CreateExercise />
+    },
+    {
+      path: ":id/update", element: <UpdateExercise />
     },
   ]
 

@@ -90,7 +90,7 @@ export default function Training() {
             return isWorkoutVisible ? (
               <div key={index} className="card-img w-[26rem] sm:w-[22rem] lg:w-[26rem] rounded-3xl relative flex duration-200 ease hover:shadow-[0px_4px_rgba(255,183,3,0.8)]">
                 <img src={pushup} alt="workout-cover" className="rounded-2xl cursor-pointer" onClick={() => handleModal(index)} />
-                < BsPlayCircleFill className="absolute top-[40%] left-[45%] text-4xl cursor-pointer" fill="#FFB703" fillOpacity={.4} />
+                < BsPlayCircleFill className="absolute top-[40%] left-[45%] text-4xl cursor-pointer hover:fill-[#FFB703]" fill="#ccccccba" onClick={() => handleModal(index)} />
                 <span className="absolute bg-black rounded-b-2xl w-full h-[40%] bottom-0 opacity-60"></span>
                 <p className="absolute top-[7rem] min-[375px]:top-[8.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] left-3 text-2xl">
                   {workout.name}

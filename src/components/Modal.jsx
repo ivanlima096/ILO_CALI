@@ -107,7 +107,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                 </div>
 
                 <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-                  <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[45%] 2xl:w-[30%] object-cover aspect-auto rounded-xl" />
+                  <img src={currentExercise.img} alt="exercise-img" className="w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[35%] 2xl:w-[30%] object-cover aspect-square rounded-xl" />
                   <div className="flex flex-col items-center justify-center">
                     {!isResting ? (
                       <>
@@ -142,7 +142,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                             setCurrentRound((prevRound) => prevRound + 1);
                             setRestTime(exercises[currentExerciseIndex]?.rest || 60);
                             setIsResting(true);
-                          } else if (!currentExerciseIndex < exercises.length - 1) {
+                          } else if (currentExerciseIndex < exercises.length - 1) {
                             if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds) {
                               setIsResting(true)
                               setRestTime(2)
@@ -174,7 +174,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
           <div className="overflow-y-auto overflow-x-hidden">
             {exercises.map((exercise, index) => (
               <div key={index} className="flex m-2 w-[100%] gap-5">
-                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-56  object-cover aspect-auto rounded-xl " />
+                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-52  object-cover aspect-square rounded-xl " />
                 <div>
                   <p className="text-xl min-[375px]:text-2xl">{exercise.name}</p>
                   <p>Rounds: {exercise.rounds}</p>

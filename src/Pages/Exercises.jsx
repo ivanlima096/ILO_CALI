@@ -1,11 +1,10 @@
-import pushup from "../assets/pushup.jpg"
-import inclinePushup from "../assets/inclinePushup.png"
-import pullup from "../assets/pullup.png"
 import { AiFillPlusSquare, AiFillEdit } from "react-icons/ai"
 import { MdDragIndicator } from "react-icons/md"
 import { TbTrash } from "react-icons/tb"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useWorkout } from "../context/WorkoutContext";
+import { useExercises } from "../context/ExercisesContext"
+import { ExercisesContext } from "../context/ExercisesContext";
 import { Link } from "react-router-dom"
 
 export default function Exercises() {
@@ -13,110 +12,7 @@ export default function Exercises() {
   const [workoutExercises, setWorkoutExercises] = useState([])
   const [workoutName, setWorkoutName] = useState("");
   const { setWorkout } = useWorkout()
-  const [exercises, setExercises] = useState([
-    {
-      name: "Push Up",
-      img: pushup,
-      rounds: 4,
-      reps: 12,
-      duration: false,
-      rest: 60,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Push Up Desalinhada",
-      img: pushup,
-      rounds: 3,
-      reps: 6,
-      duration: false,
-      rest: 60,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Push Up Crucifixo",
-      img: pushup,
-      rounds: 3,
-      reps: 6,
-      duration: false,
-      rest: 30,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Push Up Diamond",
-      img: pushup,
-      rounds: 3,
-      reps: 6,
-      duration: false,
-      rest: 60,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Incline Push Up",
-      img: inclinePushup,
-      rounds: 3,
-      reps: 12,
-      duration: false,
-      rest: 30,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Incline Diamond Push Up",
-      img: inclinePushup,
-      rounds: 3,
-      reps: 12,
-      duration: false,
-      rest: 30,
-      muscleGroup: ["Peito", "Triceps", "Ombro"]
-    },
-    {
-      name: "Pull Up",
-      img: pullup,
-      rounds: 3,
-      reps: 8,
-      duration: false,
-      rest: 90,
-      muscleGroup: ["Costas", "Biceps"]
-    },
-
-
-    {
-      name: "Remada",
-      img: pullup,
-      rounds: 3,
-      reps: 1,
-      duration: 3,
-      rest: 3,
-      muscleGroup: ["Costas", "Grip"]
-    },
-    {
-      name: "Barco",
-      img: pullup,
-      rounds: 3,
-      reps: 1,
-      duration: 3,
-      rest: 3,
-      muscleGroup: ["Costas", "Grip"]
-    },
-    {
-      name: "Canivete",
-      img: pullup,
-      rounds: 3,
-      reps: 1,
-      duration: false,
-      rest: 30,
-      muscleGroup: ["Costas", "Grip"]
-    },
-    {
-      name: "Montain Climber",
-      img: pullup,
-      rounds: 3,
-      reps: 1,
-      duration: 30,
-      rest: 30,
-      muscleGroup: ["Costas", "Grip"]
-    },
-
-  ])
+  const { exercises, removeExercise } = useContext(ExercisesContext);
 
 
 
@@ -173,11 +69,8 @@ export default function Exercises() {
   }
 
   const handleDeleteExercise = (exercise) => {
-    console.log(`Clicou em ${exercise.name}`)
-    const newExercises = exercises.filter((ex) => ex.name !== exercise.name)
-    setExercises(newExercises)
+    removeExercise(exercise)
   }
-
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-100% p-3 mx-auto">
@@ -230,7 +123,7 @@ export default function Exercises() {
                   <TbTrash
                     size={38}
                     className="mx-1 p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
-                    onClick={() => handleAddExerciseClick(exercise)}
+                    onClick={() => handleDeleteExercise(exercise)}
                   />
                 </button>
                 <span className="bg-[#ffb703] color-white w-[0.1rem]"></span>
@@ -266,14 +159,15 @@ export default function Exercises() {
 
               </div>
               <div className="h-12 flex gap-0">
-
-                <button>
-                  <AiFillEdit
-                    size={38}
-                    className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
-                    onClick={() => handleAddExerciseClick(exercise)}
-                  />
-                </button>
+                <Link to=":id/update">
+                  <button>
+                    <AiFillEdit
+                      size={38}
+                      className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
+                      onClick={() => handleAddExerciseClick(exercise)}
+                    />
+                  </button>
+                </Link>
                 <span className="bg-[#ffb703] color-white w-[0.15rem]"></span>
                 <button>
                   <TbTrash
@@ -294,7 +188,7 @@ export default function Exercises() {
               </button>
             </div>
           )))}
-        <Link to="/createExercise">
+        <Link to="/create">
           < button className="m-6 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded" >
             Cadastrar um Exercicio
           </button>
@@ -322,7 +216,7 @@ export default function Exercises() {
             {workoutExercises.map((workoutExercise) => (
 
               <div key={workoutExercise.id} className="mt-2 w-[100%] max-w-[40rem] rounded-3xl flex  items-center border-2 border-[#FFB703]">
-                <img src={workoutExercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] min-[375px]:w-[6rem] sm:w-[7rem] lg:w-[10rem]  m-2 object-cover" />
+                <img src={workoutExercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] min-[375px]:w-[6rem] sm:w-[7rem] lg:w-[10rem] aspect-square m-2 object-cover" />
                 <div className="flex justify-between items-center w-full">
 
                   <div className="flex flex-col justify-evenly">
