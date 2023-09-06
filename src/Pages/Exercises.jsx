@@ -73,7 +73,7 @@ export default function Exercises() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-100% p-3 mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-100% min-h-[90vh] p-3 mx-auto">
       <div className="w-full mx-auto flex flex-col items-center justify-between">
         <div className="flex flex-wrap justify-between items-center gap-3 mb-2">
           {
@@ -110,14 +110,14 @@ export default function Exercises() {
 
               </div>
               <div className="h-12 flex gap-0">
-
-                <button>
-                  <AiFillEdit
-                    size={38}
-                    className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
-                    onClick={() => handleAddExerciseClick(exercise)}
-                  />
-                </button>
+                <Link to={`/${exercise.id}/update`}>
+                  <button>
+                    <AiFillEdit
+                      size={38}
+                      className="p-1 border-[#FFB703] cursor-pointer hover:scale-110 duration-300 ease"
+                    />
+                  </button>
+                </Link >
                 <span className="bg-[#ffb703] color-white w-[0.15rem]"></span>
                 <button>
                   <TbTrash
@@ -140,7 +140,7 @@ export default function Exercises() {
           ))
         ) : (
           exercises.map((exercise) => (
-            <div key={exercise.name} className="py-4 h-full max-h-[15rem] mx-auto my-2 w-[100%] max-w-[40rem] rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
+            <div key={`${exercise.name}-${exercise.id}`} className="py-4 h-full max-h-[15rem] mx-auto my-2 w-[100%] max-w-[40rem] rounded-3xl flex justify-between items-center border-2 border-[#FFB703]">
               <img src={exercise.img} alt="workout-cover" className="rounded-2xl w-[4rem] aspect-square object-cover sm:w-[12rem] m-2 sm:ml-6 min-[425px]:w-[5.5rem]" />
               <div className="flex flex-col justify-evenly items-start sm:ml-5 w-[50%]">
                 <p className="text-lg md:text-2xl ">{exercise.name}</p>
@@ -159,12 +159,11 @@ export default function Exercises() {
 
               </div>
               <div className="h-12 flex gap-0">
-                <Link to=":id/update">
+                <Link to={`/${exercise.id}/update`}>
                   <button>
                     <AiFillEdit
                       size={38}
                       className="p-1 cursor-pointer hover:scale-110 duration-300 ease"
-                      onClick={() => handleAddExerciseClick(exercise)}
                     />
                   </button>
                 </Link>
@@ -197,7 +196,7 @@ export default function Exercises() {
 
       {/* SEGUNDA COLUNA */}
       <div>
-        <div className="w-full h-auto max-h-full border-2 rounded-xl border-[#FFB703] flex flex-col items-center justify-between">
+        <div className="w-full h-auto max-h-full border-2 rounded-xl border-[#FFB703] flex flex-col items-center justify-between mt-[6.5rem]">
           <div className="flex flex-col items-center">
 
             <h1 className="mt-3 text-[3rem] lg:text-[5.2rem]">Monte Seu Treino</h1>

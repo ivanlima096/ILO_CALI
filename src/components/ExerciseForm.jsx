@@ -12,7 +12,7 @@ export default function ExerciseForm({ exerciseToUpdate }) {
     reps: 12,
     duration: false,
     rest: 60,
-    muscleGroup: [""]
+    muscleGroup: []
   }
 
   const { setExercises } = useExercises();
@@ -41,23 +41,12 @@ export default function ExerciseForm({ exerciseToUpdate }) {
   const handleSubmit = (ev) => {
     ev.preventDefault()
 
-    alert(`
-    ${exercises.id}
-    ${exercises.name}
-    ${exercises.img}
-    ${exercises.rounds}
-    ${exercises.reps}
-    ${exercises.duration}
-    ${exercises.rest}
-    ${exercises.muscleGroup}
-    `)
-
     const savedExercises = JSON.parse(localStorage.getItem("savedExercises")) || [];
 
     if (exerciseToUpdate) {
       const updatedExercises = savedExercises.map((exercise) => {
         if (exercise.id === exerciseToUpdate.id) {
-          return exercises
+          return { ...exercise, ...exercises }
         } else {
           return exercise
         }
@@ -69,7 +58,7 @@ export default function ExerciseForm({ exerciseToUpdate }) {
       localStorage.setItem("savedExercises", JSON.stringify(savedExercises));
       setExercises(savedExercises);
     }
-    // navigate("/exercises")
+    navigate("/exercises")
 
   }
 
@@ -172,6 +161,7 @@ export default function ExerciseForm({ exerciseToUpdate }) {
         </div>
         <div className="text-center">
           <button
+            id="button"
             type="submit"
             className="m-6 text-[1.3rem] min-[400px]:text-[1.6rem] sm:text-[2.2rem] sm:w-[22rem] bg-[#FFB703] hover:bg-transparent text-[#121212] hover:text-[#FFB703] border-2 border-transparent hover:border-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded"
           >

@@ -11,12 +11,19 @@ export function ExercisesProvider({ children }) {
   })
 
   const removeExercise = (exerciseToRemove) => {
-    const newExercises = exercises.filter((ex) => ex.name !== exerciseToRemove.name);
-    setExercises(newExercises);
-  };
+    const savedExercises = JSON.parse(localStorage.getItem("savedExercises")) || []
+    const updatedExercises = savedExercises.filter((ex) => ex.name !== exerciseToRemove.name)
+    localStorage.setItem("savedExercises", JSON.stringify(updatedExercises));
+
+    setExercises(updatedExercises)
+  }
+
+  const getExercise = (exerciseId) => {
+    return exercises.find((exercise) => exercise.id === +exerciseId)
+  }
 
   return (
-    <ExercisesContext.Provider value={{ exercises, setExercises, removeExercise }}>
+    <ExercisesContext.Provider value={{ exercises, setExercises, removeExercise, getExercise }}>
       {children}
     </ExercisesContext.Provider>
   )

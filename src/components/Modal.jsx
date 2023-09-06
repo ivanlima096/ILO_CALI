@@ -53,8 +53,8 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
         } else if (currentExerciseIndex === exercises.length - 1 && currentRound === currentExercise.rounds && exerciseTime === 0) {
           finishWorkout();
         } else if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds && exerciseTime === 0) {
-          setIsResting(true); // Defina isResting como true após o descanso
-          setRestTime(2); // 60 segundos de descanso
+          setIsResting(true)
+          setRestTime(60)
           setCurrentExerciseIndex((prevIndex) => prevIndex + 1)
           setCurrentRound((prevRound) => prevRound = 1);
           setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
@@ -145,7 +145,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                           } else if (currentExerciseIndex < exercises.length - 1) {
                             if (currentExerciseIndex !== exercises.length - 1 && currentRound === currentExercise.rounds) {
                               setIsResting(true)
-                              setRestTime(2)
+                              setRestTime(60)
                               setCurrentRound(1);
                               setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
                               setExerciseTime(exercises[currentExerciseIndex]?.duration || exercises[0]?.reps * 5);
