@@ -1,20 +1,23 @@
 import { AiFillPlusSquare, AiFillEdit } from "react-icons/ai"
 import { MdDragIndicator } from "react-icons/md"
 import { TbTrash } from "react-icons/tb"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { useWorkout } from "../context/WorkoutContext";
 import { useExercises } from "../context/ExercisesContext"
 import { ExercisesContext } from "../context/ExercisesContext";
 import { Link } from "react-router-dom"
+import exercisesData from "../Data/exercisesData.json"
 
 export default function Exercises() {
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
   const [workoutExercises, setWorkoutExercises] = useState([])
   const [workoutName, setWorkoutName] = useState("");
   const { setWorkout } = useWorkout()
-  const { exercises, removeExercise } = useContext(ExercisesContext);
+  const { exercises, removeExercise, setExercises } = useContext(ExercisesContext);
 
-
+  useEffect(() => {
+    setExercises(exercisesData);
+  }, []);
 
   const uniqueMuscleGroups = Array.from(
     new Set(exercises.flatMap((exercise) => exercise.muscleGroup))

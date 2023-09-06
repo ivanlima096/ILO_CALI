@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "Push Up",
+    "img": "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "rounds": 4,
+    "reps": 12,
+    "duration": false,
+    "rest": 60,
+    "muscleGroup": [
+      "Peito",
+      "Triceps",
+      "Ombro"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Push Up Crucifixo",
+    "img": "https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "rounds": 3,
+    "reps": 6,
+    "duration": false,
+    "rest": 30,
+    "muscleGroup": [
+      "Peito",
+      "Triceps",
+      "Ombro"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Push Up Diamond",
+    "img": "https://media.istockphoto.com/id/1370710099/pt/foto/a-fit-asian-man-does-diamond-push-ups-at-a-mma-gym-body-weight-calisthenics-or-hiit-workout.jpg?s=1024x1024&w=is&k=20&c=_8q5YoVT7wWsC0frAeK2Y2f1sZZI4aQHLZ7vA0vP9rM=",
+    "rounds": 3,
+    "reps": 6,
+    "duration": false,
+    "rest": 60,
+    "muscleGroup": [
+      "Peito",
+      "Triceps",
+      "Ombro"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Pull Up",
+    "img": "https://images.pexels.com/photos/791764/pexels-photo-791764.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "rounds": 3,
+    "reps": 8,
+    "duration": false,
+    "rest": 90,
+    "muscleGroup": [
+      "Costas",
+      "Biceps"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Remada",
+    "img": "https://images.pexels.com/photos/8401145/pexels-photo-8401145.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "rounds": 3,
+    "reps": 1,
+    "duration": 3,
+    "rest": 3,
+    "muscleGroup": [
+      "Costas",
+      "Grip"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Montain Climber",
+    "img": "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "rounds": 3,
+    "reps": 1,
+    "duration": 30,
+    "rest": 30,
+    "muscleGroup": [
+      "Costas",
+      "Grip"
+    ]
+  }
+]
