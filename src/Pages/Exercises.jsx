@@ -15,18 +15,6 @@ export default function Exercises() {
   const { setWorkout } = useWorkout()
   const { exercises, removeExercise, setExercises } = useContext(ExercisesContext);
 
-  useEffect(() => {
-    // Carregar exercícios do localStorage quando o componente for montado
-    const storedExercises = localStorage.getItem("savedExercises");
-    if (storedExercises) {
-      try {
-        setExercises(JSON.parse(storedExercises));
-      } catch (error) {
-        console.error("Erro ao analisar os exercícios do Local Storage:", error);
-      }
-    }
-  }, []);
-
   const uniqueMuscleGroups = Array.from(
     new Set(exercises.flatMap((exercise) => exercise.muscleGroup))
   )
@@ -72,8 +60,8 @@ export default function Exercises() {
     setWorkoutExercises([])
 
     setWorkout(newWorkout)
-    const savedWorkouts = JSON.parse(localStorage.getItem("savedWorkouts")) || [];
     console.log(newWorkout);
+    const savedWorkouts = JSON.parse(localStorage.getItem("savedWorkouts")) || [];
 
     savedWorkouts.push(newWorkout);
 

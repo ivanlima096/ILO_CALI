@@ -40,7 +40,6 @@ export default function ExerciseForm({ exerciseToUpdate }) {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-
     const savedExercises = JSON.parse(localStorage.getItem("savedExercises")) || [];
 
     if (exerciseToUpdate) {
