@@ -6,7 +6,7 @@ import { useWorkout } from "../context/WorkoutContext";
 import { useExercises } from "../context/ExercisesContext"
 import { ExercisesContext } from "../context/ExercisesContext";
 import { Link } from "react-router-dom"
-import exercisesData from "../Data/exercisesData.json"
+
 
 export default function Exercises() {
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
@@ -16,7 +16,15 @@ export default function Exercises() {
   const { exercises, removeExercise, setExercises } = useContext(ExercisesContext);
 
   useEffect(() => {
-    setExercises(exercisesData);
+    // Carregar exercícios do localStorage quando o componente for montado
+    const storedExercises = localStorage.getItem("savedExercises");
+    if (storedExercises) {
+      try {
+        setExercises(JSON.parse(storedExercises));
+      } catch (error) {
+        console.error("Erro ao analisar os exercícios do Local Storage:", error);
+      }
+    }
   }, []);
 
   const uniqueMuscleGroups = Array.from(
@@ -65,6 +73,7 @@ export default function Exercises() {
 
     setWorkout(newWorkout)
     const savedWorkouts = JSON.parse(localStorage.getItem("savedWorkouts")) || [];
+    console.log(newWorkout);
 
     savedWorkouts.push(newWorkout);
 

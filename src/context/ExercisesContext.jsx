@@ -1,20 +1,29 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react"
+import exercisesData from "../Data/exercisesData.json"
 
 export const ExercisesContext = createContext({})
 
 export function ExercisesProvider({ children }) {
-  const [exercises, setExercises] = useState(() => {
+  const [exercises, setExercises] = useState([])
+
+  useEffect(() => {
+
     const storedExercises = localStorage.getItem("savedExercises")
-    if (!storedExercises) return []
-    const exercises = JSON.parse(storedExercises)
-    return exercises
-  })
+    if (storedExercises) {
+      try {
+        setExercises(JSON.parse(storedExercises))
+      } catch (error) {
+        alert("Erro ao analisar os exercícios do Local Storage:", error)
+      }
+    } else {
+      setExercises(exercisesData)
+      localStorage.setItem("savedExercises", JSON.stringify(exercisesData))
+    }
+  }, [])
 
   const removeExercise = (exerciseToRemove) => {
-    const savedExercises = JSON.parse(localStorage.getItem("savedExercises")) || []
-    const updatedExercises = savedExercises.filter((ex) => ex.name !== exerciseToRemove.name)
-    localStorage.setItem("savedExercises", JSON.stringify(updatedExercises));
-
+    const updatedExercises = exercises.filter((ex) => ex.id !== exerciseToRemove.id)
+    localStorage.setItem("savedExercises", JSON.stringify(updatedExercises))
     setExercises(updatedExercises)
   }
 
@@ -28,7 +37,6 @@ export function ExercisesProvider({ children }) {
     </ExercisesContext.Provider>
   )
 }
-
 
 export const useExercises = () => {
   return useContext(ExercisesContext)
