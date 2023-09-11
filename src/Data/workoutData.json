@@ -7,7 +7,11 @@
         "name": "Push Up",
         "duration": false,
         "img": "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "muscleGroup": [],
+        "muscleGroup": [
+          "PEITO",
+          "Triceps",
+          "Ombro"
+        ],
         "reps": 12,
         "rest": 60,
         "rounds": 3
@@ -17,7 +21,11 @@
         "name": "Push Up Crucifixo",
         "duration": false,
         "img": "https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "muscleGroup": [],
+        "muscleGroup": [
+          "PEITO",
+          "Triceps",
+          "Ombro"
+        ],
         "reps": 12,
         "rest": 60,
         "rounds": 3
@@ -27,7 +35,11 @@
         "name": "Push Up Diamond",
         "duration": false,
         "img": "https://media.istockphoto.com/id/1370710099/pt/foto/a-fit-asian-man-does-diamond-push-ups-at-a-mma-gym-body-weight-calisthenics-or-hiit-workout.jpg?s=1024x1024&w=is&k=20&c=_8q5YoVT7wWsC0frAeK2Y2f1sZZI4aQHLZ7vA0vP9rM=",
-        "muscleGroup": [],
+        "muscleGroup": [
+          "PEITO",
+          "Triceps",
+          "Ombro"
+        ],
         "reps": 12,
         "rest": 60,
         "rounds": 3
@@ -37,7 +49,11 @@
         "name": "Pull Up",
         "duration": false,
         "img": "https://images.pexels.com/photos/791764/pexels-photo-791764.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "muscleGroup": [],
+        "muscleGroup": [
+          "Costas",
+          "Biceps",
+          "Grip"
+        ],
         "reps": 12,
         "rest": 60,
         "rounds": 3
