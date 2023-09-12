@@ -107,7 +107,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                 </div>
 
                 <div className="flex flex-col w-[100%] gap-5 items-center h-[30rem] sm:h-[44rem]">
-                  <img src={currentExercise.img} alt="exercise-img" className="w-[50%] max-h-[12rem] sm:w-[80%] lg:w-[60%] xl:w-[35%] 2xl:w-[30%] object-cover aspect-square rounded-xl" />
+                  <img src={currentExercise.img} alt="exercise-img" className="w-[80%] sm:max-h-[12rem] sm:w-[80%] lg:w-[60%] xl:w-[35%] 2xl:w-[30%] object-cover aspect-square rounded-xl" />
                   <div className="flex flex-col items-center justify-center">
                     {!isResting ? (
                       <>
@@ -184,12 +184,12 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
             )}
           </>
         ) : (
-          <div className="overflow-y-auto overflow-x-hidden h-[65%] min-[425px]:h-[75%]  min-[625px]:h-[85%]">
+          <div className="overflow-y-auto overflow-x-hidden h-[65%] min-[425px]:h-[75%]  min-[625px]:h-[85%] lg:h-[80%] xl:h-[75%]">
             {exercises.map((exercise, index) => (
               <div key={index} className="flex min-[375px]:m-2 w-[100%] gap-5 ">
-                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-52  object-cover aspect-square rounded-xl " />
+                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-40  object-cover aspect-square rounded-xl " />
                 <div>
-                  <p className="text-xl min-[375px]:text-2xl">{exercise.name}</p>
+                  <p className="text-xl min-[375px]:text-2xl md:text-3xl">{exercise.name}</p>
                   <p>Rounds: {exercise.rounds}</p>
                   <p>Reps: {exercise.reps}</p>
                   {exercise.rest && <p>Descanso: {exercise.rest}</p>}
