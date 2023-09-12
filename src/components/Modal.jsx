@@ -119,25 +119,25 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
                             onClick={() => {
                               setIsPaused((prevIsPaused) => !prevIsPaused);
                             }}
-                            className="text-[2.3rem] sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                            className="text-6xl sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
                             {isPaused ? <BsPlayCircleFill /> : <BsFillPauseCircleFill />}
                           </button>
-                          <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl px-6 py-[0.1rem]">{exerciseTime}</p>
+                          <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-3xl px-6 py-[0.1rem]">{exerciseTime}</p>
 
                         </div>
                       </>
                     ) : (
                       <>
                         <p className="text-3xl min-[375px]:text-4xl text-center mb-5">Descanso:</p>
-                        <div className="w-[350px] flex items-center justify-center">
+                        <div className="w-[350px] flex items-center justify-center gap-4">
                           <button
                             onClick={() => {
                               setIsPaused((prevIsPaused) => !prevIsPaused);
                             }}
-                            className="text-[2.3rem] sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
+                            className="text-6xl sm:text-[3.2rem] hover:bg-transparent text-[#121212] hover:text-[#FFB703] duration-300 ease font-semibold px-6 py-[0.1rem] rounded">
                             {isPaused ? <BsPlayCircleFill /> : <BsFillPauseCircleFill />}
                           </button>
-                          <p className="flex justify-center items-center bg-[#FFB703] w-14 h-14 rounded-[50%] text-[#121212] text-3xl px-6 py-[0.1rem]">{restTime}</p>
+                          <p className="flex justify-center items-center bg-[#FFB703] w-16 h-16 rounded-[50%] text-[#121212] text-3xl px-6 py-[0.1rem]">{restTime}</p>
 
                         </div>
                       </>
@@ -187,7 +187,7 @@ export default function Modal({ isModalOpen, setIsModalOpen, workoutName, exerci
           <div className="overflow-y-auto overflow-x-hidden h-[65%] min-[425px]:h-[75%]  min-[625px]:h-[85%] lg:h-[80%] xl:h-[75%]">
             {exercises.map((exercise, index) => (
               <div key={index} className="flex min-[375px]:m-2 w-[100%] gap-5 ">
-                <img src={exercise.img} alt="exercise-img" className="w-28 sm:w-40 xl:w-40  object-cover aspect-square rounded-xl " />
+                <img src={exercise.img} alt="exercise-img" className="w-32 sm:w-40 xl:w-40  object-cover aspect-square rounded-xl " />
                 <div>
                   <p className="text-xl min-[375px]:text-2xl md:text-3xl">{exercise.name}</p>
                   <p>Rounds: {exercise.rounds}</p>
