@@ -8,8 +8,6 @@ export default function UpdateExercise() {
   const { getExercise } = useExercises()
 
   const exercise = getExercise(id)
-  console.log(exercise);
-  console.log(id);
   return (
     <>
       <h1>Atualizar Exercício</h1>

@@ -60,7 +60,6 @@ export default function Exercises() {
     setWorkoutExercises([])
 
     setWorkout(newWorkout)
-    console.log(newWorkout);
     const savedWorkouts = JSON.parse(localStorage.getItem("savedWorkouts")) || [];
 
     savedWorkouts.push(newWorkout);

@@ -60,11 +60,10 @@
     "img": "https://images.pexels.com/photos/8401145/pexels-photo-8401145.jpeg?auto=compress&cs=tinysrgb&w=1600",
     "rounds": 3,
     "reps": 1,
-    "duration": 3,
-    "rest": 3,
+    "duration": 30,
+    "rest": 20,
     "muscleGroup": [
-      "Costas",
-      "Grip"
+      "ABS"
     ]
   },
   {
@@ -76,8 +75,7 @@
     "duration": 30,
     "rest": 30,
     "muscleGroup": [
-      "Costas",
-      "Grip"
+      "ABS"
     ]
   }
 ]

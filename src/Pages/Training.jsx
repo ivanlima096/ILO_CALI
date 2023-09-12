@@ -1,5 +1,4 @@
 import { BsPlayCircleFill } from "react-icons/bs";
-import pushup from "../assets/pushup.jpg";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { ImCalendar } from "react-icons/im";
 import { TbTrash } from "react-icons/tb";
@@ -78,7 +77,6 @@ export default function Training() {
           </div>
         ))}
       </div>
-
       <div className="my-4 px-3 flex flex-wrap gap-4 md:gap-4 lg:gap-8 w-full justify-center items-center">
         {storedWorkouts.length > 0 ? (
           storedWorkouts.map((workout, index) => {
@@ -89,13 +87,13 @@ export default function Training() {
 
             return isWorkoutVisible ? (
               <div key={index} className="card-img w-[26rem] sm:w-[22rem] lg:w-[26rem] rounded-3xl relative flex duration-200 ease hover:shadow-[0px_4px_rgba(255,183,3,0.8)]">
-                <img src={pushup} alt="workout-cover" className="rounded-2xl cursor-pointer" onClick={() => handleModal(index)} />
+                <img src={workout.exercises[0].img} alt="workout-cover" className="rounded-2xl cursor-pointer w-full max-w-[415px] max-h-[275px] object-cover" onClick={() => handleModal(index)} />
                 < BsPlayCircleFill className="absolute top-[40%] left-[45%] text-4xl cursor-pointer hover:fill-[#FFB703]" fill="#ccccccba" onClick={() => handleModal(index)} />
                 <span className="absolute bg-black rounded-b-2xl w-full h-[40%] bottom-0 opacity-60"></span>
-                <p className="absolute top-[7rem] min-[375px]:top-[8.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] left-3 text-2xl">
+                <p className="absolute top-[6.8rem] min-[375px]:top-[9.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] left-3 text-2xl">
                   {workout.name}
                 </p>
-                <p className="absolute top-[7rem] min-[375px]:top-[8.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] right-4 text-xl">
+                <p className="absolute top-[6.8rem] min-[375px]:top-[9.3rem] min-[425px]:top-[9.7rem] sm:top-[9rem] lg:top-[11rem] right-4 text-xl">
                   <TbTrash
                     className="cursor-pointer hover:scale-110 duration-300 ease text-2xl min-[375px]:text-3xl"
                     onClick={() => handleRemoveWorkoutClick(workout)}
