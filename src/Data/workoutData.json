@@ -1,61 +1,263 @@
 [
   {
-    "name": "treino peito / tríceps",
+    "name": "treino de costas / biceps",
     "exercises": [
       {
-        "id": 5939,
-        "name": "Push Up",
-        "duration": false,
-        "img": "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "muscleGroup": [
-          "PEITO",
-          "Triceps",
-          "Ombro"
-        ],
-        "reps": 12,
-        "rest": 60,
-        "rounds": 3
-      },
-      {
-        "id": 9214,
-        "name": "Push Up Crucifixo",
-        "duration": false,
-        "img": "https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        "muscleGroup": [
-          "PEITO",
-          "Triceps",
-          "Ombro"
-        ],
-        "reps": 12,
-        "rest": 60,
-        "rounds": 3
-      },
-      {
-        "id": 2306,
-        "name": "Push Up Diamond",
-        "duration": false,
-        "img": "https://media.istockphoto.com/id/1370710099/pt/foto/a-fit-asian-man-does-diamond-push-ups-at-a-mma-gym-body-weight-calisthenics-or-hiit-workout.jpg?s=1024x1024&w=is&k=20&c=_8q5YoVT7wWsC0frAeK2Y2f1sZZI4aQHLZ7vA0vP9rM=",
-        "muscleGroup": [
-          "PEITO",
-          "Triceps",
-          "Ombro"
-        ],
-        "reps": 12,
-        "rest": 60,
-        "rounds": 3
-      },
-      {
-        "id": 5429,
+        "id": 2523,
         "name": "Pull Up",
         "duration": false,
         "img": "https://images.pexels.com/photos/791764/pexels-photo-791764.jpeg?auto=compress&cs=tinysrgb&w=1600",
         "muscleGroup": [
           "Costas",
-          "Biceps",
-          "Grip"
+          "Biceps"
+        ],
+        "reps": 10,
+        "rest": 90,
+        "rounds": 3
+      },
+      {
+        "id": 4324,
+        "name": "chin up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/7187887/pexels-photo-7187887.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "costas",
+          "biceps",
+          "grip"
         ],
         "reps": 12,
         "rest": 60,
+        "rounds": 3
+      },
+      {
+        "id": 8253,
+        "name": "australian pull up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/5837209/pexels-photo-5837209.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "costas",
+          "biceps",
+          "ombro"
+        ],
+        "reps": 12,
+        "rest": 60,
+        "rounds": 3
+      },
+      {
+        "id": 266,
+        "name": "australian chin up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/8519698/pexels-photo-8519698.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "costas",
+          "biceps",
+          "grip"
+        ],
+        "reps": 12,
+        "rest": 60,
+        "rounds": 3
+      },
+      {
+        "id": 1189,
+        "name": "bar hold",
+        "duration": 30,
+        "img": "https://images.pexels.com/photos/7698277/pexels-photo-7698277.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "costas",
+          "grip",
+          "biceps"
+        ],
+        "reps": 12,
+        "rest": "90",
+        "rounds": "2"
+      },
+      {
+        "id": 1830,
+        "name": "remada",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/6389070/pexels-photo-6389070.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "costas",
+          "biceps"
+        ],
+        "reps": 12,
+        "rest": 60,
+        "rounds": 3
+      },
+      {
+        "id": 5064,
+        "name": "rosca direta",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/13885345/pexels-photo-13885345.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "biceps"
+        ],
+        "reps": 10,
+        "rest": 60,
+        "rounds": 3
+      },
+      {
+        "id": 2794,
+        "name": "grip hold",
+        "duration": "20",
+        "img": "https://images.pexels.com/photos/1458696/pexels-photo-1458696.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "grip"
+        ],
+        "reps": 12,
+        "rest": 60,
+        "rounds": 3
+      }
+    ]
+  },
+  {
+    "name": "peito / triceps / ombro",
+    "exercises": [
+      {
+        "id": 2009,
+        "name": "incline push up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/6388386/pexels-photo-6388386.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "peito",
+          "triceps",
+          "ombro"
+        ],
+        "reps": 15,
+        "rest": "30",
+        "rounds": 3
+      },
+      {
+        "id": 5752,
+        "name": "flexao desalinhada",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/4662334/pexels-photo-4662334.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "peito",
+          "triceps",
+          "ombro"
+        ],
+        "reps": 6,
+        "rest": "60",
+        "rounds": 3
+      },
+      {
+        "id": 7167,
+        "name": "canivete",
+        "duration": 30,
+        "img": "https://images.pexels.com/photos/8401145/pexels-photo-8401145.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "Costas",
+          "Grip"
+        ],
+        "reps": 1,
+        "rest": "20",
+        "rounds": 3
+      },
+      {
+        "id": 523,
+        "name": "Push Up Crucifixo",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/4162487/pexels-photo-4162487.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "Peito",
+          "Triceps",
+          "Ombro"
+        ],
+        "reps": 6,
+        "rest": "30",
+        "rounds": 3
+      },
+      {
+        "id": 333,
+        "name": "Push Up Diamond",
+        "duration": false,
+        "img": "https://media.istockphoto.com/id/1370710099/pt/foto/a-fit-asian-man-does-diamond-push-ups-at-a-mma-gym-body-weight-calisthenics-or-hiit-workout.jpg?s=1024x1024&w=is&k=20&c=_8q5YoVT7wWsC0frAeK2Y2f1sZZI4aQHLZ7vA0vP9rM=",
+        "muscleGroup": [
+          "Peito",
+          "Triceps",
+          "Ombro"
+        ],
+        "reps": 6,
+        "rest": "60",
+        "rounds": 3
+      },
+      {
+        "id": 1355,
+        "name": "barco",
+        "duration": "20",
+        "img": "https://images.pexels.com/photos/6454168/pexels-photo-6454168.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "abs"
+        ],
+        "reps": "1",
+        "rest": "30",
+        "rounds": 3
+      },
+      {
+        "id": 2341,
+        "name": "canivete",
+        "duration": 25,
+        "img": "https://images.pexels.com/photos/8401145/pexels-photo-8401145.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "Costas",
+          "Grip"
+        ],
+        "reps": 1,
+        "rest": "20",
+        "rounds": 3
+      },
+      {
+        "id": 3444,
+        "name": "incline push up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/6388386/pexels-photo-6388386.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "peito",
+          "triceps",
+          "ombro"
+        ],
+        "reps": "13",
+        "rest": "30",
+        "rounds": 3
+      },
+      {
+        "id": 7319,
+        "name": "Montain Climber",
+        "duration": 30,
+        "img": "https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "Costas",
+          "Grip"
+        ],
+        "reps": 1,
+        "rest": "30",
+        "rounds": 3
+      },
+      {
+        "id": 9728,
+        "name": "Push Up",
+        "duration": false,
+        "img": "https://images.pexels.com/photos/2780762/pexels-photo-2780762.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "Peito",
+          "Triceps",
+          "Ombro"
+        ],
+        "reps": 12,
+        "rest": "60",
+        "rounds": 2
+      },
+      {
+        "id": 6963,
+        "name": "barco",
+        "duration": "20",
+        "img": "https://images.pexels.com/photos/6454168/pexels-photo-6454168.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "muscleGroup": [
+          "abs"
+        ],
+        "reps": "1",
+        "rest": "30",
         "rounds": 3
       }
     ]
